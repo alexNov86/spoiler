@@ -86,8 +86,6 @@ body {
   height: 100%;
   padding: 40px;
 }
-.block {
-}
 .block__item {
   margin: 0px 0px 20px 0px;
 }
@@ -107,6 +105,11 @@ body {
   background-color: #000;
   position: absolute;
   top: 8px;
+  transition: all 0.5s ease 0s;
+  -webkit-transition: all 0.5s ease 0s;
+  -moz-transition: all 0.5s ease 0s;
+  -ms-transition: all 0.5s ease 0s;
+  -o-transition: all 0.5s ease 0s;
 }
 .block__title::before {
   transform: rotate(40deg);

@@ -1,11 +1,4 @@
 document.addEventListener("DOMContentLoaded", (event) => {
-  // const allTitle = document.querySelectorAll(".block__title");
-  // // Обвертывем текстовый элемент в span
-  // for (let title of allTitle) {
-  //   let span = document.createElement("span");
-  //   title.prepend(span);
-  //   span.append(span.nextSibling);
-  // }
   const articles = document.querySelectorAll(".block__item");
   articles.forEach((article) => {
     article.addEventListener("click", function (event) {
@@ -13,8 +6,27 @@ document.addEventListener("DOMContentLoaded", (event) => {
       if (blockTitle.className.indexOf("block__title") == -1) return;
       const blockText = this.querySelector(".block__text");
       if (!blockText) return;
-      blockTitle.classList.toggle("active");
-      blockText.classList.toggle("block__text_expanded");
+      // проверяем есть ли модификатор accordion, если есть то спойлер ведет себя как аккордеон
+      const accordion = event.target.closest(".block_accordion");
+      if (accordion) {
+        const allBlockTitle = accordion.querySelectorAll(
+          ".block__title.active"
+        );
+        const allBlockText = accordion.querySelectorAll(
+          ".block__text.block__text_expanded"
+        );
+        blockTitle.classList.toggle("active");
+        blockText.classList.toggle("block__text_expanded");
+        if (allBlockTitle && allBlockText) {
+          allBlockTitle.forEach((title) => title.classList.remove("active"));
+          allBlockText.forEach((text) =>
+            text.classList.remove("block__text_expanded")
+          );
+        }
+      } else {
+        blockTitle.classList.toggle("active");
+        blockText.classList.toggle("block__text_expanded");
+      }
     });
   });
 });
