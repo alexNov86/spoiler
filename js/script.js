@@ -7,13 +7,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
   //   span.append(span.nextSibling);
   // }
   const articles = document.querySelectorAll(".block__item");
-  let 
   articles.forEach((article) => {
     article.addEventListener("click", function (event) {
+      const blockTitle = event.target;
+      if (blockTitle.className.indexOf("block__title") == -1) return;
       const blockText = this.querySelector(".block__text");
       if (!blockText) return;
-      this.classList.toggle("active");
-      blockText.style.display = "block";
+      blockTitle.classList.toggle("active");
+      blockText.classList.toggle("block__text_expanded");
     });
   });
 });
